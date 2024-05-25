@@ -1,6 +1,24 @@
 # Adversarial-Attack-Neural-Networks
 Repository aimed at documenting adversarial attacks on neural networks and potential ways to stop them
 
+## Fast Gradient Sign Method (FGSM) Attack on the MNIST Dataset
+The Fast Gradient Sign Method (FGSM) is an adversarial attack technique that perturbs input images in a single step to fool a neural network into making incorrect predictions. FGSM works by leveraging the gradients of the loss function with respect to the input image to create adversarial examples.
+
+### MNIST Dataset
+The MNIST dataset is a collection of 70,000 handwritten digit images, split into 60,000 training images and 10,000 test images. Each image is 28x28 pixels and belongs to one of 10 classes (digits 0 through 9).
+
+### Attack Implementation
+#### Model Training:
+- A simple Convolutional Neural Network (CNN) is trained on the MNIST dataset to classify the digits.
+- The CNN consists of two convolutional layers followed by two fully connected layers.
+#### Generating Adversarial Examples:
+- The FGSM attack is applied to the test images to generate adversarial examples.
+- The attack perturbs the input images by adding a small step in the direction of the gradient of the loss with respect to the input images. This step size is controlled by the parameter epsilon (ε).
+#### Visualization:
+- The original images and their corresponding adversarial examples are visualized side by side.
+- Despite minimal visual differences, the adversarial examples are crafted to deceive the model into making incorrect predictions.
+
+
 ## BIM Attack on MNIST Dataset
 The Basic Iterative Method (BIM) is an adversarial attack technique that iteratively perturbs input images to fool a neural network into making incorrect predictions. This attack is an extension of the Fast Gradient Sign Method (FGSM), where multiple small steps are taken in the direction of the gradient to craft adversarial examples.
 
