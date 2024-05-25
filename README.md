@@ -30,10 +30,10 @@ The MNIST dataset is a collection of 70,000 handwritten digit images, split into
 - A simple Convolutional Neural Network (CNN) is trained on the MNIST dataset to classify the digits.
 - The CNN consists of two convolutional layers followed by two fully connected layers.
 #### Generating Adversarial Examples:
-The BIM attack is applied to the test images to generate adversarial examples.
-The attack iteratively adjusts the pixel values of the input images to maximize the model's prediction error, while keeping the perturbations within a specified limit (epsilon).
+- The BIM attack is applied to the test images to generate adversarial examples.
+- The attack iteratively adjusts the pixel values of the input images to maximize the model's prediction error, while keeping the perturbations within a specified limit (epsilon).
 #### Visualization:
-The original images and their corresponding adversarial examples are visualized side by side.
-Despite minimal visual differences, the adversarial examples are crafted to deceive the model into making incorrect predictions.
+- The original images and their corresponding adversarial examples are visualized side by side.
+- Despite minimal visual differences, the adversarial examples are crafted to deceive the model into making incorrect predictions.
 
 The BIM attack demonstrates the vulnerability of neural networks to adversarial examples. By iteratively applying small perturbations, the attack effectively deceives the model while keeping the changes to the input images minimal. This highlights the importance of developing robust defenses against such adversarial attacks.
