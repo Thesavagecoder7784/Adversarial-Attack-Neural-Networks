@@ -19,7 +19,7 @@ The MNIST dataset is a collection of 70,000 handwritten digit images, split into
 - Despite minimal visual differences, the adversarial examples are crafted to deceive the model into making incorrect predictions.
 
 
-## BIM Attack on MNIST Dataset
+## Basic Iterative Method (BIM) Attack on MNIST Dataset
 The Basic Iterative Method (BIM) is an adversarial attack technique that iteratively perturbs input images to fool a neural network into making incorrect predictions. This attack is an extension of the Fast Gradient Sign Method (FGSM), where multiple small steps are taken in the direction of the gradient to craft adversarial examples.
 
 ### MNIST Dataset
