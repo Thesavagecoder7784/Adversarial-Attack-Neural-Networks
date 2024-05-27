@@ -56,3 +56,24 @@ The original images and their corresponding adversarial examples are visualized 
 Despite minimal visual differences, the adversarial examples are crafted to deceive the model into making incorrect predictions.
 
 The PGD attack demonstrates the vulnerability of neural networks to adversarial examples by iteratively applying small perturbations and projecting them back into the allowed epsilon ball. This ensures that the perturbations are within a specified limit while effectively deceiving the model. The PGD attack highlights the need for developing robust defenses against such adversarial attacks.
+
+## DeepFool Attack on the Fashion-MNIST Dataset
+The DeepFool attack is an adversarial attack technique that iteratively perturbs input images to move them towards the decision boundary of the classifier. This process continues until the image is misclassified by the neural network.
+
+### Fashion-MNIST Dataset
+The Fashion-MNIST dataset is a collection of Zalando's article images, consisting of 60,000 training examples and 10,000 test examples. Each example is a 28x28 grayscale image, associated with a label from 10 classes.
+
+### Attack Implementation
+#### Model Training:
+- A simple Convolutional Neural Network (CNN) is trained on the Fashion-MNIST dataset to classify the images.
+- The CNN consists of two convolutional layers followed by two fully connected layers.
+
+#### Generating Adversarial Examples:
+- The DeepFool attack is applied to the test images to generate adversarial examples.
+- The attack iteratively perturbs the input images to move them towards the decision boundary of the classifier.
+
+#### Visualization:
+- The original images and their corresponding adversarial examples are visualized side by side.
+- Despite minimal visual differences, the adversarial examples are crafted to deceive the model into making incorrect predictions.
+
+The DeepFool attack demonstrates the vulnerability of neural networks to adversarial examples by iteratively perturbing the input images to move them toward the decision boundary of the classifier. This highlights the importance of developing robust defenses against such adversarial attacks.
