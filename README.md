@@ -1,6 +1,13 @@
 # Adversarial-Attack-Neural-Networks
 Repository aimed at documenting adversarial attacks on neural networks and potential ways to stop them
 
+## List of Attacks:
+1. Fast Gradient Sign Method (FGSM) Attack
+2. Basic Iterative Method (BIM) Attack
+3. Projected Gradient Descent (PGD) Attack
+4. DeepFool Attack
+
+
 ## Fast Gradient Sign Method (FGSM) Attack on the MNIST Dataset
 The Fast Gradient Sign Method (FGSM) is an adversarial attack technique that perturbs input images in a single step to fool a neural network into making incorrect predictions. FGSM works by leveraging the gradients of the loss function concerning the input image to create adversarial examples.
 
