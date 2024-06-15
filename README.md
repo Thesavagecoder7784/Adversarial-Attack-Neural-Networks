@@ -6,6 +6,7 @@ Repository aimed at documenting adversarial attacks on neural networks and poten
 2. Basic Iterative Method (BIM) Attack
 3. Projected Gradient Descent (PGD) Attack
 4. DeepFool Attack
+5. Jacobian-based Saliency Map Attack (JSMA) Attack
 
 
 ## Fast Gradient Sign Method (FGSM) Attack on the MNIST Dataset
@@ -84,3 +85,27 @@ The Fashion-MNIST dataset is a collection of Zalando's article images, consistin
 - Despite minimal visual differences, the adversarial examples are crafted to deceive the model into making incorrect predictions.
 
 The DeepFool attack demonstrates the vulnerability of neural networks to adversarial examples by iteratively perturbing the input images to move them toward the decision boundary of the classifier. This highlights the importance of developing robust defenses against such adversarial attacks.
+
+## Jacobian-based Saliency Map Attack (JSMA) on the MNIST dataset
+The Jacobian-based Saliency Map Attack (JSMA) is an adversarial attack designed to deceive machine learning models, especially those used for image classification tasks. JSMA generates adversarial examples by perturbing input features, like pixels in an image, to maximize the change in the model's output while minimizing the visibility of the perturbation.
+
+### MNIST Dataset
+The MNIST dataset is a collection of 70,000 handwritten digit images, split into 60,000 training images and 10,000 test images. Each image is 28x28 pixels and belongs to one of 10 classes (digits 0 through 9).
+
+### Attack Implementation
+#### Model Training:
+- A simple Convolutional Neural Network (CNN) is trained on the MNIST dataset to classify the images.
+- The CNN consists of two convolutional layers followed by two fully connected layers.
+
+#### Generating Adversarial Examples:
+- The JSMA attack is applied to the test images to generate adversarial examples.
+- Calculate a saliency map to identify the most important pixels in the image. This is done by computing the gradient of the model's output with respect to the input image.
+- Perturb pixels to increase the likelihood of misclassification to the target class while keeping the perturbation visually imperceptible. Applies perturbations iteratively, gradually increasing the difference between the original and perturbed images.
+- Stops when either the image is misclassified or a predefined perturbation budget is reached.
+- The attack iteratively perturbs the input images to move them towards the target class selected by the user (in this example, it is 2).
+
+#### Visualization:
+- The original images and their corresponding adversarial examples are visualized side by side.
+- Despite minimal visual differences, the adversarial examples are crafted to deceive the model into making incorrect predictions.
+
+JSMA demonstrates the vulnerability of machine learning models to adversarial attacks and emphasizes the importance of developing robust models that can withstand such attacks. Defending against adversarial examples is critical for ensuring the reliability and security of machine learning systems in practical applications.
