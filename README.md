@@ -7,6 +7,7 @@ Repository aimed at documenting adversarial attacks on neural networks and poten
 3. Projected Gradient Descent (PGD) Attack
 4. DeepFool Attack
 5. Jacobian-based Saliency Map Attack (JSMA) Attack
+6. Boundary Attack
 
 
 ## Fast Gradient Sign Method (FGSM) Attack on the MNIST Dataset
@@ -109,3 +110,23 @@ The MNIST dataset is a collection of 70,000 handwritten digit images, split into
 - Despite minimal visual differences, the adversarial examples are crafted to deceive the model into making incorrect predictions.
 
 JSMA demonstrates the vulnerability of machine learning models to adversarial attacks and emphasizes the importance of developing robust models that can withstand such attacks. Defending against adversarial examples is critical for ensuring the reliability and security of machine learning systems in practical applications.
+
+
+## Boundary Attack
+The Boundary Attack is an iterative adversarial attack technique that generates adversarial examples by starting from a target image and gradually moving towards the original image while ensuring that the adversarial example remains misclassified. This attack does not require access to the gradients of the model, making it suitable for black-box scenarios.
+
+### MNIST Dataset
+The MNIST dataset is a collection of 70,000 handwritten digit images, split into 60,000 training images and 10,000 test images. Each image is 28x28 pixels and belongs to one of 10 classes (digits 0 through 9).
+
+### Attack Implementation
+#### Model Training:
+A simple Convolutional Neural Network (CNN) is trained on the MNIST dataset to classify the digits. The CNN consists of two convolutional layers followed by two fully connected layers.
+
+#### Generating Adversarial Examples:
+The Boundary Attack is applied to the test images to generate adversarial examples.
+The attack starts from a target image and iteratively moves towards the original image by taking small steps along the boundary that separates the original class from the target class.
+The step size is controlled by the parameter epsilon (ε), ensuring that the perturbations are minimal and the adversarial examples remain visually similar to the original images.
+
+#### Visualization:
+Multiple sets of original images, target images, and their corresponding adversarial examples are visualized side by side.
+Despite minimal visual differences, the adversarial examples are crafted to deceive the model into making incorrect predictions.
