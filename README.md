@@ -9,8 +9,11 @@ Adversarial attacks are performed on neural networks to affect their ability to 
 4. DeepFool Attack
 5. Jacobian-based Saliency Map Attack (JSMA) Attack
 6. Boundary Attack
+7. Carlini & Wagner (C&W) Attack
+8. Limited-memory Broyden–Fletcher–Goldfarb–Shanno (L-BFGS) Attack
+9. Momentum Iterative FGSM (MI-FGSM) Attack
 
-#Datasets 
+# Datasets 
 ## MNIST Dataset
 The MNIST dataset is a collection of 70,000 handwritten digit images, split into 60,000 training images and 10,000 test images. Each image is 28x28 pixels and belongs to one of 10 classes (digits 0 through 9).
 
