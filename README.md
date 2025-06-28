@@ -225,3 +225,7 @@ The HopSkipJump Attack works in an iterative fashion, maintaining an adversarial
 4. Jump Step (Binary Search): After the "hop", a binary search is performed along the line segment connecting the current adversarial point and the original input. This "jumps" the adversarial example back onto the decision boundary, ensuring it remains misclassified while minimizing the distance to the original input.
 5. Refinement: Small random steps (gamma) are sometimes added to help escape local minima and ensure convergence.
 This iterative process continuously reduces the distance between the adversarial example and the original input, eventually yielding a subtle perturbation that causes misclassification.
+
+
+## OBSERVATION:
+while ZOO and Square attacks are valuable black-box techniques, their reliance on direct gradient approximation or random patch sampling can be less effective or require more tuning and queries compared to boundary-based attacks like HopSkipJump, especially in scenarios with complex decision boundaries or limited epsilon budgets. HopSkipJump's explicit strategy of traversing the decision boundary makes it particularly well-suited for finding minimal adversarial perturbations in black-box settings.
