@@ -12,6 +12,9 @@ Adversarial attacks are performed on neural networks to affect their ability to 
 7. Carlini & Wagner (C&W) Attack
 8. Limited-memory Broyden–Fletcher–Goldfarb–Shanno (L-BFGS) Attack
 9. Momentum Iterative FGSM (MI-FGSM) Attack
+10. Zeroth Order Optimization (ZOO) Attack
+11. Square Attack
+12. HopSkipJump Attack
 
 # Datasets 
 ## MNIST Dataset
@@ -171,3 +174,54 @@ The MI-FGSM attack iteratively perturbs an input image. In each iteration:
 6. The pixel values of the perturbed image are clamped to stay within the valid [0, 1] range.
 7. This iterative process, guided by momentum, drives the image across the decision boundary of the model, leading to misclassification.
 
+# Zeroth-Order Optimization (ZOO) Attack
+The Zeroth-Order Optimization (ZOO) Attack is a powerful black-box adversarial attack technique. It is designed to generate adversarial examples by estimating the gradients of the model's loss function without direct access to its internal architecture, weights, or gradients. This makes it highly versatile for real-world scenarios where models are proprietary or only accessible via an API. ZOO is typically a targeted attack, aiming to misclassify an input into a specific desired class.
+
+## Attack Implementation
+### Model Training:
+For the Python implementation, an MLPClassifier (Multi-layer Perceptron) from scikit-learn is trained on the digits dataset. This model acts as our "black-box" target, simulating a scenario where we can only query its predictions (probabilities) but cannot inspect its internal parameters or compute gradients directly. The digits dataset consists of 8x8 pixel images of handwritten digits, which are flattened into 64-feature vectors and normalized to the [0, 1] range.
+
+### Generating Adversarial Examples:
+The ZOO attack iteratively crafts an adversarial example by:
+
+1. Initializing with a copy of the original input.
+2. Estimating Gradients: For each feature (dimension) of the input, the attack makes small positive and negative perturbations (controlled by delta). It then queries the black-box model with these perturbed inputs to evaluate an objective function (similar to C&W's classification loss, accounting for target_class and kappa). The gradient for that dimension is approximated using a finite difference formula based on these objective values.
+3. Updating: The adversarial example is updated by taking a small step in the negative direction of the estimated gradient (controlled by learning_rate), effectively performing gradient descent in the estimated gradient space.
+4. Projecting: After each update, the perturbation is clipped to adhere to an epsilon_budget (L-infinity norm) relative to the original input, and the adversarial example's pixel values are clamped to the valid [0, 1] range.
+5. This iterative process continues for total_iterations, progressively refining the adversarial example until it achieves the targeted misclassification.
+
+# Square Attack
+The Square Attack is a black-box, query-efficient adversarial attack. It operates without access to the target model's gradients, making it highly practical for real-world applications. This attack generates adversarial examples by iteratively adding small, randomly placed "square" shaped perturbations to the input image. It evaluates the effect of these perturbations by querying the model and accepts them only if they improve the attack's objective, aiming to induce targeted misclassification with a minimal L-infinity perturbation.
+
+## Attack Implementation
+### Model Training:
+In the Python code, an MLPClassifier from scikit-learn is trained on the digits dataset. This model functions as the black-box classifier we aim to attack. The digits dataset, containing flattened 8x8 grayscale images of digits, is preprocessed by normalizing pixel values to the [0, 1] range, which is standard for image-based adversarial attacks.
+
+### Generating Adversarial Examples:
+The Square Attack iteratively creates an adversarial example:
+
+1. Initialization: The attack typically starts with an initial adversarial example that is already misclassified (e.g., random noise within the epsilon budget) or the original input itself.
+2. Patch Proposal: In each iteration, a random square-shaped region within the current adversarial image is chosen. The size of this square is influenced by the p_step parameter (a probability that relates to the proportion of features being updated).
+3. Perturbation Generation: Random noise, scaled by the epsilon budget, is generated for this specific square region.
+4. Candidate Evaluation: A new candidate adversarial example is formed by applying this noise within the square to the current adversarial image, while keeping the rest of the image unchanged.
+5. Objective Evaluation: The black-box model is queried with this candidate to evaluate an objective function, which quantifies how well the candidate input is classified towards the target_class (considering a kappa confidence margin).
+6. Acceptance Rule: If the candidate improves the objective (i.e., leads to a stronger misclassification towards the target), the candidate replaces the current adversarial example. Otherwise, it is discarded.
+7. Clipping: All pixel values are clipped to the valid [0, 1] range after each update.
+This iterative "trial-and-error" process efficiently explores the adversarial space, eventually finding a small, localized perturbation that fools the model into the desired target class.
+
+# HopSkipJump Attack
+The HopSkipJump Attack is a black-box, boundary-based adversarial attack that aims to find minimal perturbations (L2 norm) to misclassify an input. Unlike gradient-based methods, it does not require access to the model's internal gradients. Instead, it estimates the normal vector to the decision boundary through numerous model queries. This allows it to "hop" towards the original image and "jump" along the decision boundary, making it efficient in finding adversarial examples. It is typically used for untargeted attacks (forcing any misclassification) but can be adapted for targeted scenarios.
+
+## Attack Implementation
+### Model Training:
+For the Python code, an MLPClassifier from scikit-learn is trained on the digits dataset. This model serves as the black-box target whose decision boundaries the attack will explore. The digits dataset's features (pixel values) are scaled to the [0, 1] range to ensure proper handling by the attack algorithm.
+
+### Generating Adversarial Examples:
+The HopSkipJump Attack works in an iterative fashion, maintaining an adversarial example that is already misclassified and continuously moving it closer to the original input while staying on the "wrong" side of the decision boundary:
+
+1. Initialization: The attack begins by finding an initial adversarial example that is far from the original input but is already misclassified by the model. This is typically done by adding large random noise and performing a binary search to land on the decision boundary.
+2. Normal Estimation: At the current adversarial point, the attack estimates the normal vector to the decision boundary. This is achieved by making multiple random queries around the current point and observing which queries cross the boundary (i.e., change classification). The average direction of these boundary crossings gives an approximation of the normal vector.
+3. Hop Step: The current adversarial example is moved along the estimated normal vector towards the original input. This "hops" the adversarial example closer to the original.
+4. Jump Step (Binary Search): After the "hop", a binary search is performed along the line segment connecting the current adversarial point and the original input. This "jumps" the adversarial example back onto the decision boundary, ensuring it remains misclassified while minimizing the distance to the original input.
+5. Refinement: Small random steps (gamma) are sometimes added to help escape local minima and ensure convergence.
+This iterative process continuously reduces the distance between the adversarial example and the original input, eventually yielding a subtle perturbation that causes misclassification.
