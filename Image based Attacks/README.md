@@ -1,5 +1,4 @@
 # Adversarial-Attack-Neural-Networks
-The repository aimed at documenting adversarial attacks on neural networks and potential ways to stop them. 
 Adversarial attacks are performed on neural networks to affect their ability to predict accurately. This could have adverse implications for the self-driving or healthcare industry.
 
 ## List of Attacks:
