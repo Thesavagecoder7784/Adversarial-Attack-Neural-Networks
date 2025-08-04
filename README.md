@@ -23,6 +23,7 @@ The MNIST dataset is a collection of 70,000 handwritten digit images, split into
 ## Fashion-MNIST Dataset
 The Fashion-MNIST dataset is a collection of Zalando's article images, consisting of 60,000 training examples and 10,000 test examples. Each example is a 28x28 grayscale image, associated with a label from 10 classes.
 
+# Algorithms
 ## Fast Gradient Sign Method (FGSM) Attack on the MNIST Dataset
 The Fast Gradient Sign Method (FGSM) is an adversarial attack technique that perturbs input images in a single step to fool a neural network into making incorrect predictions. FGSM works by leveraging the gradients of the loss function concerning the input image to create adversarial examples. Used on the MNIST dataset.
 
