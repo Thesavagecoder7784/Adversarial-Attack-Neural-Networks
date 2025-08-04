@@ -14,3 +14,7 @@ The repository aimed at documenting adversarial attacks on neural networks and p
 10. Zeroth Order Optimization (ZOO) Attack
 11. Square Attack
 12. HopSkipJump Attack
+
+## Text-Based Attacks
+1. Simple Word Attack
+2. Simple Character Attack
