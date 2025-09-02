@@ -1,6 +1,9 @@
 # Adversarial Attacks on Neural Networks
 The repository aimed at documenting adversarial attacks on neural networks and potential ways to stop them.
 
+## Adversarial Attacks
+An adversarial attack is when someone deliberately creates small, carefully crafted changes to the input of a machine learning model so that the model makes a mistake, even though the changes are almost invisible to humans.
+
 ## Image-Based Attacks
 1. Fast Gradient Sign Method (FGSM) Attack
 2. Basic Iterative Method (BIM) Attack
